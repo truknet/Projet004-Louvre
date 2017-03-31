@@ -1,0 +1,45 @@
+services:
+#    app.example:
+#        class: AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    app.generatePrices:
+        class: AppBundle\Services\GeneratePrices
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@app.getAge"
+
+    app.getAge:
+        class: AppBundle\Services\GetAge
+
+    app.createTicket:
+        class: AppBundle\Services\CreateTicket
+
+    app.sendEmail:
+        class: AppBundle\Services\SendEmail
+        arguments:
+            - "@templating"
+            - "@mailer"
+
+    app.createUniqId:
+        class: AppBundle\Services\CreateUniqId
+
+    app.saveClient:
+        class: AppBundle\Services\GestionClient
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    app.getSessionClient:
+        class: AppBundle\Services\GestionClient
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    app.setSessionClient:
+        class: AppBundle\Services\GestionClient
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    app.generateListDateDisabled:
+        class: AppBundle\Services\GenerateListDateDisabled
+        arguments:
+            - "@doctrine.orm.entity_manager"

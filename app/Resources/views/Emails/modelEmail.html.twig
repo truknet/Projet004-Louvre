@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-sm-4" style="text-align: center">
+                            <img src="http://www.louvre.fr/sites/all/themes/louvre/img/data/logo-louvre.jpg" width="100%">
+                        </div>
+                        <div class="col-sm-8" style="text-align: center">
+                            <h3>Billetterie du Musée du Louvre</h3>
+                            <p>Votre commande  : #{{ client.id }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <h4>Informations</h4>
+                    <p>
+                        Email : {{ client.email }} </br>
+                        Date de réservation : {{ client.dateReservation|date('d/m/Y') }} </br>
+                        Nombre de ticket : {{ client.nbrTicket }} </br>
+                        Type de ticket : {{ client.typeTicket }} </br>
+                        Code de réservation : {{ client.uniquId }}
+                    </p>
+                </div>
+                <div class="well">
+                    <table class="table table-condensed" style="font-size: small">
+                        <thead>
+                        <tr>
+                            <td>Ticket N°</td>
+                            <td>Nom</td>
+                            <td>Prenom</td>
+                            <td>Date de naissance</td>
+                            <td>TR</td>
+                            <td>Prix</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ticket in client.Tickets %}
+                            <tr>
+                                <td>{{ ticket.id }}</td>
+                                <td>{{ ticket.name }}</td>
+                                <td>{{ ticket.firstname }}</td>
+                                <td>{{ ticket.birthday.date|date('d/m/Y') }}</td>
+                                <td>
+                                    {% if (ticket.tarifReduit) %}
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ ticket.prix|number_format(2, '.', ',') }}€</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <br />
+                    <p>Total commande : {{ client.prixTotal|number_format(2, '.', ',') }}€</p>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center">Nous vous remercions de votre commande et nous vous souhaitons un bon moment au Musée du Louvre.</p>
+        <p style="text-align: center">Cet Email fait office de billet d'entrée</p>
+        <footer class="well" style="text-align: center">
+                <p>&copy;2017 Projet 4 - Billetterie Musée du Louvre</p>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
