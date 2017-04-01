@@ -43,6 +43,8 @@ class BilletterieController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->container->get('app.setSessionClient')->setSessionClient($client);
+
+            if ($this->container->get('app.controleDate')->controleDate($client) === false) { return $this->redirectToRoute('info_base'); }
             $request->getSession()->getFlashBag()->add('info', 'Etape 1 enregistrée avec succèss !');
             return $this->redirectToRoute('fill_ticket', array('id' => $client->getId()));
         }
@@ -117,6 +119,7 @@ class BilletterieController extends Controller
             $client->setToken($token);
             $this->container->get('app.createUniqId')->createUniqId($client);
             $this->container->get('app.setSessionClient')->setSessionClient($client);
+
             return $this->redirectToRoute('final_command', array('id' => $client->getId()));
         } catch(Card $e) {
 

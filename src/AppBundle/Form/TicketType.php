@@ -22,7 +22,10 @@ class TicketType extends AbstractType
             ->add('firstname', TextType::class)
             ->add('country', CountryType::class, array(
                 'preferred_choices' => array('FR')))
-            ->add('birthday', BirthdayType::class, array())
+            ->add('birthday', BirthdayType::class, array(
+                'model_timezone' => 'Europe/Paris',
+                'view_timezone' => 'Europe/Paris',
+            ))
             ->add('tarifReduit', CheckboxType::class, array('required' => false))
         ;
     }

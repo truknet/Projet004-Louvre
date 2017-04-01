@@ -28,6 +28,7 @@ class GenerateListDateDisabled
      */
     public function generateListDateDisabled()
     {
+        $this->listDateDisabled = array();
         $this->generateListOver1000();
         $this->generateListHolidays();
         return $this->listDateDisabled;

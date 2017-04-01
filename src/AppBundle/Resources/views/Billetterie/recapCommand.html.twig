@@ -1,6 +1,6 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Etape 3{% endblock %}
 
 {% block stylesheets %}{% endblock %}
 
@@ -9,7 +9,6 @@
         <h3 class="box"><b>Etape 3 - Confirmation de commande</b></h3>
         <br />
         <div class="box">
-            <p>Client ID : {{ client.id }} </br>
                 Email : {{ client.email }} </br>
                 Date de réservation : {{ client.dateReservation|date('d/m/Y') }} </br>
                 Nombre de ticket : {{ client.nbrTicket }} </br>
@@ -18,7 +17,6 @@
             <table class="tabCommand">
                 <thead>
                     <tr>
-                        <td>Ticket N°</td>
                         <td>Nom</td>
                         <td>Prenom</td>
                         <td>Date de naissance</td>
@@ -29,7 +27,6 @@
                 <tbody>
                     {% for ticket in client.Tickets %}
                     <tr>
-                        <td>{{ ticket.id }}</td>
                         <td>{{ ticket.name }}</td>
                         <td>{{ ticket.firstname }}</td>
                         <td>{{ ticket.birthday.date|date('d/m/Y') }}</td>
@@ -53,7 +50,7 @@
                         data-key="pk_test_LxgN9vsI0c4K5wK628nb8362"
                         data-amount="{{ client.prixTotal|number_format(2, '.', ',') * 100 }}"
                         data-name="Musée du Louvre"
-                        data-description="Commande #{{ client.id }}"
+                        data-description="Commande Billet"
                         data-locale="auto"
                         data-currency="eur">
                 </script>

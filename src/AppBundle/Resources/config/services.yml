@@ -9,6 +9,11 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@app.getAge"
 
+    app.controleDate:
+        class: AppBundle\Services\ControleDate
+        arguments:
+            - "@app.generateListDateDisabled"
+
     app.getAge:
         class: AppBundle\Services\GetAge
 
