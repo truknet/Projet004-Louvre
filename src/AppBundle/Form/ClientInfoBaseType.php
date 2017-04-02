@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 
 class ClientInfoBaseType extends AbstractType
@@ -28,9 +29,13 @@ class ClientInfoBaseType extends AbstractType
             ->add('dateReservation', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
+                'required' => true,
                 'attr' => array('readonly' => 'readonly', 'onchange' => 'verif14h()'),
             ))
-            ->add('nbrTicket')
+            ->add('nbrTicket', IntegerType::class, array(
+                'required' => true,
+            ))
+
             ->add('typeTicket', ChoiceType::class, array(
                 'choices' => array(
                     'Ticket journée' => 'Journée',

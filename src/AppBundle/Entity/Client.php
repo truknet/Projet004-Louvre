@@ -45,7 +45,7 @@ class Client
     /**
      * @var \Date
      *
-     * @ORM\Column(name="date_reservation", type="date")
+     * @ORM\Column(name="date_reservation", type="date", nullable=false)
      * @Assert\Date()
      * @Assert\Range(min = "now -1 days", max = "+365 days")
      */
@@ -62,6 +62,7 @@ class Client
      * @var integer
      *
      * @ORM\Column(name="nbr_ticket", type="integer", nullable=false)
+     * @Assert\Range(min="1")
      */
     private $nbrTicket;
 

@@ -43,7 +43,6 @@ class BilletterieController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->container->get('app.setSessionClient')->setSessionClient($client);
-
             if ($this->container->get('app.controleDate')->controleDate($client) === false) { return $this->redirectToRoute('info_base'); }
             $request->getSession()->getFlashBag()->add('info', 'Etape 1 enregistrée avec succèss !');
             return $this->redirectToRoute('fill_ticket', array('id' => $client->getId()));
@@ -77,6 +76,7 @@ class BilletterieController extends Controller
 
     /**
      * @return Response
+     * @param Request $request
      * @Route("/recapcommand", name="recap_command")
      */
     public function recapCommand(Request $request)
@@ -97,6 +97,7 @@ class BilletterieController extends Controller
      *     methods="POST"
      * )
      * @return Response
+     * @param Request $request
      */
     public function checkoutAction(Request $request)
     {
@@ -104,7 +105,6 @@ class BilletterieController extends Controller
         if ($client === null) { return $this->redirectToRoute('homepage'); }
 
         Stripe::setApiKey("sk_test_ajscgIwFoEKfQprwjktnuZKi");
-
         // Get the credit card details submitted by the form
         $token = $_POST['stripeToken'];
         // Create a charge: this will charge the user's card
@@ -119,10 +119,8 @@ class BilletterieController extends Controller
             $client->setToken($token);
             $this->container->get('app.createUniqId')->createUniqId($client);
             $this->container->get('app.setSessionClient')->setSessionClient($client);
-
             return $this->redirectToRoute('final_command', array('id' => $client->getId()));
         } catch(Card $e) {
-
             $this->addFlash("error","Une erreur s'est produite pendant le paiement !");
             return $this->redirectToRoute('recap_command', array('id' => $client->getId()));
             // The card has been declined
@@ -139,18 +137,10 @@ class BilletterieController extends Controller
         $client = $this->container->get('app.getSessionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
         $this->container->get('app.saveClient')->saveClient($client);
-
-
         if ($client->getToken()) {
             // Envoie Email
             $this->container->get('app.sendEmail')->sendEmail($client);
         }
-        $client = null;
         return $this->render('AppBundle:Billetterie:finalCommand.html.twig');
     }
-
-
-
-
-
 }

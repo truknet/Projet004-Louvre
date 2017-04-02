@@ -46,9 +46,9 @@ body {
 }
 
 .main_content {
-    margin-right: auto;
-    margin-left: auto;
+    text-align: center;
     margin-top: 50px;
+    width: 500px;
 }
 
 .box {
@@ -59,7 +59,6 @@ body {
     border: solid 1px #adadad;
     font-size: medium;
     padding: 5px;
-    max-width: 500px;
     text-align: center;
     margin: auto;
 }

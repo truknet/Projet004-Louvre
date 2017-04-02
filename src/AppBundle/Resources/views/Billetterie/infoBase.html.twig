@@ -5,71 +5,71 @@
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
-    <div class="main_content">
-        <h3 class="box"><b>Etape 1 - Demande d'informations</b></h3>
-        <br />
-        <div class="box">
 
-            {{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <h3 class="box"><b>Etape 1 - Demande d'informations</b></h3>
+    <br />
+    <div class="box">
 
-            {{ form_errors(form) }}
+        {{ form_start(form, {'attr': {'class': 'form'}}) }}
 
-            {# Champ Email #}
-            <div class="form-group">
-                {{ form_label(form.email.first, "Email : ", {'label_attr': {'class': 'control-label'}}) }}
-                <div class="col-sm-12">
-                    {{ form_widget(form.email.first, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.email.first) }}
-                </div>
+        {{ form_errors(form) }}
+
+        {# Champ Email #}
+        <div class="form-group">
+            {{ form_label(form.email.first, "Email : ", {'label_attr': {'class': 'control-label'}}) }}
+            <div class="col-sm-12">
+                {{ form_widget(form.email.first, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email.first) }}
             </div>
-            {# Champ Confirm Email #}
-            <div class="form-group">
-                {{ form_label(form.email.second, "Confirmer votre Email : ", {'label_attr': {'class': 'control-label'}}) }}
-                <div class="col-sm-12">
-                    {{ form_widget(form.email.second, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.email.second) }}
-                </div>
+        </div>
+        {# Champ Confirm Email #}
+        <div class="form-group">
+            {{ form_label(form.email.second, "Confirmer votre Email : ", {'label_attr': {'class': 'control-label'}}) }}
+            <div class="col-sm-12">
+                {{ form_widget(form.email.second, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email.second) }}
             </div>
-            {# Champ Date de réservation #}
-            <div class="form-group">
-                {{ form_label(form.dateReservation, "Date de réservation : ", {'label_attr': {'class': 'control-label'}}) }}
-                <div class="col-sm-12">
-                    <div class="input-group date">
-                        {{ form_widget(form.dateReservation) }}
-                        <div class="input-group-addon">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </div>
+        </div>
+        {# Champ Date de réservation #}
+        <div class="form-group">
+            {{ form_label(form.dateReservation, "Date de réservation : ", {'label_attr': {'class': 'control-label'}}) }}
+            <div class="col-sm-12">
+                <div class="input-group date">
+                    {{ form_widget(form.dateReservation) }}
+                    <div class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
                     </div>
-                    {{ form_errors(form.dateReservation) }}
                 </div>
+                {{ form_errors(form.dateReservation) }}
             </div>
-            {# Champ Nombre de ticket #}
-            <div class="form-group">
-                {{ form_label(form.nbrTicket, "Nombre de ticket : ", {'label_attr': {'class': 'control-label'}}) }}
-                <div class="col-sm-12">
-                    {{ form_widget(form.nbrTicket) }}
-                    {{ form_errors(form.nbrTicket) }}
-                </div>
+        </div>
+        {# Champ Nombre de ticket #}
+        <div class="form-group">
+            {{ form_label(form.nbrTicket, "Nombre de ticket : ", {'label_attr': {'class': 'control-label'}}) }}
+            <div class="col-sm-12">
+                {{ form_widget(form.nbrTicket) }}
+                {{ form_errors(form.nbrTicket) }}
             </div>
-
-            {# Champ Type de ticket #}
-            <div class="form-group">
-                {{ form_label(form.typeTicket, "Type de ticket : ", {'label_attr': {'class': 'control-label'}}) }}
-                <div class="col-sm-12">
-                    {{ form_widget(form.typeTicket) }}
-                    <label id="message"></label>
-                    {{ form_errors(form.typeTicket) }}
-                </div>
-            </div>
-
-            <div>
-                <br />
-                <input type="submit" value="Valider" class="btn btn-success" />
-            </div>
-            {{ form_end(form) }}
         </div>
 
+        {# Champ Type de ticket #}
+        <div class="form-group">
+            {{ form_label(form.typeTicket, "Type de ticket : ", {'label_attr': {'class': 'control-label'}}) }}
+            <div class="col-sm-12">
+                {{ form_widget(form.typeTicket) }}
+                <label id="message"></label>
+                {{ form_errors(form.typeTicket) }}
+            </div>
+        </div>
+
+        <div>
+            <br />
+            <input type="submit" value="Valider" class="btn btn-success" />
+        </div>
+        {{ form_end(form) }}
     </div>
+
+
 
 {% endblock %}
 
