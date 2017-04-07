@@ -4,49 +4,69 @@ namespace Tests\AppBundle\Controller;
 
 use AppBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BilletterieControllerTest extends WebTestCase
 {
 
-    /**
-     *
-     */
-    public function testIndex()
+    public function testIndexAction()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/fr/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Découvrir le Louvre !', $crawler->filter('h1')->text());
+        $this->assertContains('title.body.titleh1', $crawler->filter('h1')->text());
+        $link = $crawler
+            ->filter('a:contains("button.booking")')
+            ->eq(0)
+            ->link()
+        ;
+        $client->click($link);
     }
 
-    /**
-     *
-     */
-    public function testSetEmail()
-    {
-        $client = new Client();
-        $client->setEmail('info@truknet.com');
-        $this->assertEquals('info@truknet.com', $client->getEmail());
-    }
-
-    /**
-     *
-     */
-    public function testPageInfoBase()
+    public function testInfoBaseAction()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/infobase');
-        $this->assertEquals(1, $crawler->filter('h3:contains("Etape 1 - Demande d\'informations")')->count());
-        $form = $crawler->selectButton('Valider')->form(array(
-            'appbundle_client[email][first]'        => 'info@truknet.com',
-            'appbundle_client[email][second]'       => 'info@truknet.com',
-            'appbundle_client[dateReservation]'     => '01/04/2017',
-            'appbundle_client[nbrTicket]'           => 1,
-            'appbundle_client[typeTicket]'          => 'Journée',
-        ));
+        $crawler = $client->request('GET', '/fr/infobase');
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('h3:contains("title.page.etape1")')->count());
+
+        $form = $crawler->selectButton('button.validate')->form();
+        $form['appbundle_client[email][first]'] = 'info@truknet.com';
+        $form['appbundle_client[email][second]'] = 'info@truknet.com';
+        $form['appbundle_client[dateReservation]'] = (new \DateTime())->format('Y-m-d');
+        $form['appbundle_client[nbrTicket]'] = 1;
+        $form['appbundle_client[typeTicket]'] = 'Journée';
         $crawler = $client->submit($form);
     }
 
+    /**
+     *
+     */
+    public function testFillTicketAction()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/fillticket');
+
+        $clientX = new Client();
+        $clientX->setDate(new \DateTime());
+        $clientX->setEmail('info@truknet.com');
+        $clientX->setDateReservation(new \DateTime());
+        $clientX->setNbrTicket(1);
+        $clientX->setTypeTicket('Journée');
+
+
+        $form = $crawler->filter('input[type=submit]')->form();
+
+        $form['ticket_array_form[tickets][0][name]'] = 'Justine';
+        $form['ticket_array_form[tickets][0][firstname]'] = 'Roche';
+        $form['ticket_array_form[tickets][0][country]'] = 'FR';
+        $form['ticket_array_form[tickets][0][birthday][day]'] = 11;
+        $form['ticket_array_form[tickets][0][birthday][month]'] = 5;
+        $form['ticket_array_form[tickets][0][birthday][year]'] = 2001;
+        $form['ticket_array_form[tickets][0][tarifReduit]'] = false;
+        $crawler = $client->submit($form);
+
+    }
 
     /**
      * @dataProvider urlProvider
@@ -64,8 +84,8 @@ class BilletterieControllerTest extends WebTestCase
     public function urlProvider()
     {
         return array(
-            array('/'),
-            array('/infobase'),
+            array('/fr/'),
+            array('/fr/infobase'),
         );
     }
 

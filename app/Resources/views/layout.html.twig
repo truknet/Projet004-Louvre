@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %} - Billetterie du Louvre</title>
+    <title>{% block title %}{% endblock %} - {{ 'title.page.titleParent'|trans }}</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker3.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/billetteriecss.css') }}" />
@@ -16,9 +16,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="cursive">Découvrir le Louvre !</h1>
-            <h2 class="sub"><b>Réservation de ticket pour la visite du musée.</b></h2>
-            <a style="color: white" href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Voir informations sur les tarifs</a><br><br>
+            <h1 class="cursive">{{ 'title.body.titleh1'|trans }}</h1>
+            <h2 class="sub"><b>{{ 'title.body.titleh2'|trans }}</b></h2>
+            <a style="color: white" href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> {{ 'button.priceInfo'|trans }}</a><br><br>
         </div>
     </div>
 </div>
@@ -28,41 +28,41 @@
     <div class="modal-dialog box">
         <div class="modal-content box">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
-                <h4 class="modal-title" id="myModalLabel">Informations sur les Tarifs</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'modal.buttonClose'|trans }}</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ 'modal.titlePriceInfo'|trans }}</h4>
             </div>
             <div class="modal-body">
                 <table style="border: solid 1px beige; width: 100%">
                     <thead style="border: solid 1px beige">
                     <tr>
-                        <td>Tarif</td>
-                        <td>Prix Journée</td>
-                        <td>Prix Demi-journée</td>
+                        <td>{{ 'modal.tableTitlePrice'|trans }}</td>
+                        <td>{{ 'modal.tableTitleDay'|trans }}</td>
+                        <td>{{ 'modal.tableTitleHalfDay'|trans }}</td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Enfant (de 0 à 3 ans)</td>
+                        <td>{{ 'modal.tableLine_1_1'|trans }}</td>
                         <td>0.00€</td>
                         <td>0.00€</td>
                     </tr>
                     <tr>
-                        <td>Enfant (de 4 à 11 ans)</td>
+                        <td>{{ 'modal.tableLine_2_1'|trans }}</td>
                         <td>8.00€</td>
                         <td>4.00€</td>
                     </tr>
                     <tr>
-                        <td>Normal (à patir de 12 ans)</td>
+                        <td>{{ 'modal.tableLine_3_1'|trans }}</td>
                         <td>16.00€</td>
                         <td>8.00€</td>
                     </tr>
                     <tr>
-                        <td>Senior (à patir de 60 ans)</td>
+                        <td>{{ 'modal.tableLine_4_1'|trans }}</td>
                         <td>12.00€</td>
                         <td>6.00€</td>
                     </tr>
                     <tr>
-                        <td>Réduit</td>
+                        <td>{{ 'modal.tableLine_5_1'|trans }}</td>
                         <td>10.00€</td>
                         <td>5.00€</td>
                     </tr>
@@ -71,14 +71,22 @@
                 <br>
 
                 <p>
-                    <b>Tarif réduit : </b><br>Le tarif réduit est accordè dans certaines conditions(étudiants, employé du musée, d'un service du Ministère de la Culture, militaire...)<br>
-                    Les personnes qui ont choisi l'option tarif réduit doivent se présenter muni d'un justificatif.<br><br>
-                    <b>Tarif Journée : </b><br>Ce tarif donne accès au musée de l'heure d'ouverture jusqu'à la fermeture.<br><br>
-                    <b>Tarif Démi-Journée : </b><br>Ce tarif donne accès au musée de 14 heure jusqu'à la fermeture.<br><br>
+                    <b>{{ 'modal.infoTitle_1'|trans }} : </b>
+                    <br>
+                    {{ 'modal.infoText_1'|trans }}
+                    <br><br>
+                    <b>{{ 'modal.infoTitle_2'|trans }} : </b>
+                    <br>
+                    {{ 'modal.infoText_2'|trans }}
+                    <br><br>
+                    <b>{{ 'modal.infoTitle_3'|trans }} : </b>
+                    <br>
+                    {{ 'modal.infoText_3'|trans }}
+                    <br><br>
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'modal.buttonClose'|trans }}</button>
             </div>
         </div>
     </div>
@@ -102,7 +110,7 @@
 
 <footer class="footer">
     <div class="container">
-        <p>&copy;2017 Projet 4 - Billetterie Musée du Louvre</p>
+        <p>{{ 'title.footer.content'|trans }}</p>
     </div>
 </footer>
 

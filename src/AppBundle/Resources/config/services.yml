@@ -3,16 +3,37 @@ services:
 #        class: AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
+    validator.date.reservation:
+        class: AppBundle\Validator\Constraints\constraintsCheckDateReservationValidator
+        arguments:
+            - "@app.checkIfDateIsBefore"
+            - "@app.checkIfDateInList"
+        tags:
+            - { name: validator.constraint_validator }
+
+    validator.type.ticket:
+        class: AppBundle\Validator\Constraints\constraintsCheckTypeTicketValidator
+        arguments:
+            - "@app.checkIf14Hour"
+        tags:
+            - { name: validator.constraint_validator }
+
+    app.checkIfDateIsBefore:
+        class: AppBundle\Services\CheckIfDateIsBefore
+
+    app.checkIfDateInList:
+        class: AppBundle\Services\CheckIfDateInList
+        arguments:
+            - "@app.generateListDateDisabled"
+
+    app.checkIf14Hour:
+        class: AppBundle\Services\CheckIf14Hour
+
     app.generatePrices:
         class: AppBundle\Services\GeneratePrices
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@app.getAge"
-
-    app.controleDate:
-        class: AppBundle\Services\ControleDate
-        arguments:
-            - "@app.generateListDateDisabled"
 
     app.getAge:
         class: AppBundle\Services\GetAge
@@ -25,9 +46,6 @@ services:
         arguments:
             - "@templating"
             - "@mailer"
-
-    app.createUniqId:
-        class: AppBundle\Services\CreateUniqId
 
     app.saveClient:
         class: AppBundle\Services\GestionClient

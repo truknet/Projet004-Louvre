@@ -18,15 +18,24 @@ class TicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('firstname', TextType::class)
-            ->add('country', CountryType::class, array(
-                'preferred_choices' => array('FR')))
-            ->add('birthday', BirthdayType::class, array(
-                'model_timezone' => 'Europe/Paris',
-                'view_timezone' => 'Europe/Paris',
+            ->add('name', TextType::class, array(
+                'label' => 'form.name'
             ))
-            ->add('tarifReduit', CheckboxType::class, array('required' => false))
+            ->add('firstname', TextType::class, array(
+                'label' => 'form.firstname'
+            ))
+            ->add('country', CountryType::class, array(
+                'label' => 'form.country',
+                'preferred_choices' => array('FR')
+            ))
+            ->add('birthday', BirthdayType::class, array(
+                'label' => 'form.birthdate',
+                'format' => 'dd MM yyyy',
+            ))
+            ->add('tarifReduit', CheckboxType::class, array(
+                'required' => false,
+                'label' => 'form.reducedPrice'
+            ))
         ;
     }
     

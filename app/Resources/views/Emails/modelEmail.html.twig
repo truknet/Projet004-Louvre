@@ -20,31 +20,31 @@
                             <img src="http://www.louvre.fr/sites/all/themes/louvre/img/data/logo-louvre.jpg" width="100%">
                         </div>
                         <div class="col-sm-8" style="text-align: center">
-                            <h3>Billetterie du Musée du Louvre</h3>
-                            <p>Votre commande  : #{{ client.id }}</p>
+                            <h3>{{ 'modelEmail.titleh3'|trans }}</h3>
+                            <p>{{ 'modelEmail.yourCommand'|trans }}  : #{{ client.id }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="well">
-                    <h4>Informations</h4>
+                    <h4>{{ 'modelEmail.information'|trans }}</h4>
                     <p>
-                        Email : {{ client.email }} </br>
-                        Date de réservation : {{ client.dateReservation|date('d/m/Y') }} </br>
-                        Nombre de ticket : {{ client.nbrTicket }} </br>
-                        Type de ticket : {{ client.typeTicket }} </br>
-                        Code de réservation : {{ client.uniquId }}
+                        {{ 'form.email'|trans }} : {{ client.email }} </br>
+                        {{ 'form.dateReservation'|trans }} : {{ client.dateReservation|date('d/m/Y') }} </br>
+                        {{ 'form.nbrTicket'|trans }} : {{ client.nbrTicket }} </br>
+                        {{ 'form.typeTicket'|trans }} : {{ client.typeTicket }} </br>
+                        {{ 'modelEmail.code'|trans }} : {{ client.uniquId }}
                     </p>
                 </div>
                 <div class="well">
                     <table class="table table-condensed" style="font-size: small">
                         <thead>
                         <tr>
-                            <td>Ticket N°</td>
-                            <td>Nom</td>
-                            <td>Prenom</td>
-                            <td>Date de naissance</td>
-                            <td>TR</td>
-                            <td>Prix</td>
+                            <td>{{ 'modelEmail.ticketNum'|trans }}</td>
+                            <td>{{ 'form.name'|trans }}</td>
+                            <td>{{ 'form.firstname'|trans }}</td>
+                            <td>{{ 'form.birthdate'|trans }}</td>
+                            <td>{{ 'form.abbReducedPrice'|trans }}</td>
+                            <td>{{ 'form.price'|trans }}</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,14 +66,14 @@
                     </table>
 
                     <br />
-                    <p>Total commande : {{ client.prixTotal|number_format(2, '.', ',') }}€</p>
+                    <p>{{ 'text.totalOrder'|trans }} : {{ client.prixTotal|number_format(2, '.', ',') }}€</p>
                 </div>
             </div>
         </div>
-        <p style="text-align: center">Nous vous remercions de votre commande et nous vous souhaitons un bon moment au Musée du Louvre.</p>
-        <p style="text-align: center">Cet Email fait office de billet d'entrée</p>
+        <p style="text-align: center">{{ 'modelEmail.msgline1'|trans }}</p>
+        <p style="text-align: center">{{ 'modelEmail.msgline2'|trans }}</p>
         <footer class="well" style="text-align: center">
-                <p>&copy;2017 Projet 4 - Billetterie Musée du Louvre</p>
+                <p>{{ 'title.footer.content'|trans }}</p>
         </footer>
     </div>
     <script src="https://code.jquery.com/jquery.min.js"></script>

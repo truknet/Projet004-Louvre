@@ -82,7 +82,6 @@ class Ticket
     public function __construct()
     {
         $this->birthday = new \Datetime();
-        $this->birthday->setTimezone(new \DateTimeZone('Europe/Paris'));
     }
 
     /**

@@ -1,20 +1,20 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "layout.html.twig" %}
 
-{% block title %}Etape 2{% endblock %}
+{% block title %}{{ 'title.page.etape2'|trans }}{% endblock %}
 
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
 
-    <h3 class="box"><b>Etape 2 - Remplir les Tickets</b></h3>
+    <h3 class="box"><b>{{ 'title.page.etape2'|trans }} - {{ 'title.body.h3etape2'|trans }}</b></h3>
     <br />
     <div class="box">
-        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_start(form) }}
         {{ form_errors(form) }}
         {% for ticket in form.tickets %}
             <div class="form-group">
                 <div class="col-sm-4">
-                    {{ form_label(ticket.name, "Nom :", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(ticket.name) }}
                     {{ form_errors(ticket.name) }}
                 </div>
                 <div class="col-sm-8">
@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-4">
-                    {{ form_label(ticket.firstname, "Prénom :", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(ticket.firstname) }}
                     {{ form_errors(ticket.firstname) }}
                 </div>
                 <div class="col-sm-8">
@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <div class="col-sm-4">
-                    {{ form_label(ticket.country, "Pays :", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(ticket.country) }}
                     {{ form_errors(ticket.country) }}
                 </div>
                 <div class="col-sm-8">
@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 <div class="col-sm-4">
-                    {{ form_label(ticket.birthday, "Date Naissance :", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(ticket.birthday) }}
                     {{ form_errors(ticket.birthday) }}
                 </div>
                 <div class="col-sm-8">
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-4">
-                    {{ form_label(ticket.tarifReduit, "Tarif Réduit :", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(ticket.tarifReduit) }}
                     {{ form_errors(ticket.tarifReduit) }}
                 </div>
                 <div class="col-sm-8">
@@ -62,7 +62,7 @@
         <hr>
         {% endfor %}
         <div>
-            <input type="submit" value="Valider" class="btn btn-success" />
+            <input type="submit" value="{{ 'button.validate'|trans }}" class="btn btn-success" />
         </div>
         {{ form_end(form) }}
     </div>

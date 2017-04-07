@@ -5,15 +5,20 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Validator\Constraints as CustomAssert;
 
 /**
  * Client
  *
  * @ORM\Table(name="client")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ClientRepository")
+ *
  */
 class Client
 {
+
+    const TYPE_DAY = 'Journée';
+    const TYPE_HALF_DAY = 'Demi-journée';
     /**
      * @var int
      *
@@ -43,11 +48,14 @@ class Client
     private $date;
 
     /**
-     * @var \Date
+     * @var \DateTime
      *
-     * @ORM\Column(name="date_reservation", type="date", nullable=false)
-     * @Assert\Date()
+     * @ORM\Column(name="date_reservation", type="datetime", nullable=false)
+     * @Assert\DateTime()
+     * @CustomAssert\constraintsCheckDateReservation()
      * @Assert\Range(min = "now -1 days", max = "+365 days")
+     * @Assert\NotBlank();
+     *
      */
     private $dateReservation;
 
@@ -68,7 +76,7 @@ class Client
 
     /**
      * @var string
-     *
+     * @CustomAssert\constraintsCheckTypeTicket()
      * @ORM\Column(name="type_ticket", type="string", length=255, nullable=true)
      */
     private $typeTicket;
@@ -100,6 +108,7 @@ class Client
         $this->date = new \Datetime();
         $this->date->setTimezone(new \DateTimeZone('Europe/Paris'));
         $this->tickets = new ArrayCollection();
+        $this->uniquid = uniqid();
     }
 
 

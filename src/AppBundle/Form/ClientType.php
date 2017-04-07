@@ -23,30 +23,28 @@ class ClientType extends AbstractType
             ->add('email', RepeatedType::class, array(
                 'type' => EmailType::class,
                 'required' => true,
-                'first_options'  => array('label' => 'Email'),
-                'second_options' => array('label' => 'Confirmer Email')
+                'first_options'  => array('label' => 'form.email'),
+                'second_options' => array('label' => 'form.confirmEmail')
             ))
             ->add('date', DateTimeType::class)
             ->add('dateReservation', DateType::class, array(
                 'widget' => 'single_text',
+                'label' => 'form.dateReservation',
                 'format' => 'dd/MM/yyyy',
+                'required' => true,
                 'attr' => array('readonly' => 'readonly', 'onchange' => 'verif14h()'),
             ))
             ->add('uniquId')
             ->add('nbrTicket')
             ->add('typeTicket', ChoiceType::class, array(
                 'choices' => array(
-                    'Ticket journée' => 'Journée',
-                    'Ticket demi-journée' => 'Demi-journée',
+                    'form.radiotypeTicket1' => Client::TYPE_DAY,
+                    'form.radiotypeTicket2' => Client::TYPE_HALF_DAY,
                 ),
+                'label' => 'form.typeTicket',
                 'expanded' => true,
                 'multiple' => false,
                 'required' => true,
-                'choice_attr' => array(
-                    'Ticket journée' => null,
-                    'Ticket demi-journée' => null
-                ),
-
             ))
             ->add('prixTotal')
         ;

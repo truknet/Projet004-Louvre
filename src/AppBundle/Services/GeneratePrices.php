@@ -1,12 +1,4 @@
 <?php
-
-/*
- * Function qui  generer les prix de chaque ticket d'un client
- * Argument : objet Client
- *
- *
- */
-
 namespace AppBundle\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,18 +35,16 @@ class GeneratePrices
         $priceRange = array_merge($tranche1, $tranche2, $tranche3, $tranche4);
         $tarifReduit = 10; // Prix pour les tarifs réduits
 
+        $coef = ($client->getTypeTicket() == Client::TYPE_DAY) ? 1 : 0.5;
+
         foreach ($client->getTickets() as $ticket) {
-            if ($client->getTypeTicket() == 'Journée') {
-                if ($ticket->getTarifReduit() == 0) {
-                    $ticket->setPrix($priceRange[$this->getAge->getAge($ticket->getBirthday())]);
+            if ($ticket->getTarifReduit() == false) {
+                $ticket->setPrix($priceRange[$this->getAge->getAge($ticket->getBirthday())] * $coef);
+            } else {
+                if (($priceRange[$this->getAge->getAge($ticket->getBirthday())] * $coef) > ($tarifReduit * $coef)) {
+                    $ticket->setPrix($tarifReduit * $coef);
                 } else {
-                    $ticket->setPrix($tarifReduit);
-                }
-            } elseif ($client->getTypeTicket() == 'Demi-journée') {
-                if ($ticket->getTarifReduit() == 0) {
-                    $ticket->setPrix($priceRange[$this->getAge->getAge($ticket->getBirthday())] / 2);
-                } else {
-                    $ticket->setPrix($tarifReduit / 2);
+                    $ticket->setPrix($priceRange[$this->getAge->getAge($ticket->getBirthday())] * $coef);
                 }
             }
         }

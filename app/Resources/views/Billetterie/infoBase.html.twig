@@ -1,12 +1,12 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "layout.html.twig" %}
 
-{% block title %}Etape 1{% endblock %}
+{% block title %}{{ 'title.page.etape1'|trans }}{% endblock %}
 
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
 
-    <h3 class="box"><b>Etape 1 - Demande d'informations</b></h3>
+    <h3 class="box"><b>{{ 'title.page.etape1'|trans }} - {{ 'title.body.h3etape1'|trans }}</b></h3>
     <br />
     <div class="box">
 
@@ -16,23 +16,23 @@
 
         {# Champ Email #}
         <div class="form-group">
-            {{ form_label(form.email.first, "Email : ", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_label(form.email.first) }}
             <div class="col-sm-12">
-                {{ form_widget(form.email.first, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.email.first) }}
                 {{ form_errors(form.email.first) }}
             </div>
         </div>
         {# Champ Confirm Email #}
         <div class="form-group">
-            {{ form_label(form.email.second, "Confirmer votre Email : ", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_label(form.email.second) }}
             <div class="col-sm-12">
-                {{ form_widget(form.email.second, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.email.second) }}
                 {{ form_errors(form.email.second) }}
             </div>
         </div>
         {# Champ Date de réservation #}
         <div class="form-group">
-            {{ form_label(form.dateReservation, "Date de réservation : ", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_label(form.dateReservation) }}
             <div class="col-sm-12">
                 <div class="input-group date">
                     {{ form_widget(form.dateReservation) }}
@@ -45,7 +45,7 @@
         </div>
         {# Champ Nombre de ticket #}
         <div class="form-group">
-            {{ form_label(form.nbrTicket, "Nombre de ticket : ", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_label(form.nbrTicket) }}
             <div class="col-sm-12">
                 {{ form_widget(form.nbrTicket) }}
                 {{ form_errors(form.nbrTicket) }}
@@ -54,7 +54,7 @@
 
         {# Champ Type de ticket #}
         <div class="form-group">
-            {{ form_label(form.typeTicket, "Type de ticket : ", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_label(form.typeTicket) }}
             <div class="col-sm-12">
                 {{ form_widget(form.typeTicket) }}
                 <label id="message"></label>
@@ -64,7 +64,7 @@
 
         <div>
             <br />
-            <input type="submit" value="Valider" class="btn btn-success" />
+            <input type="submit" value="{{ 'button.validate'|trans }}" class="btn btn-success" />
         </div>
         {{ form_end(form) }}
     </div>
@@ -76,7 +76,8 @@
 {% block javascript %}
     <script >
         $('.input-group.date').datepicker({
-            language: "fr",
+            language: "{{ app.request.locale }}",
+            format: "dd MM yyyy",
             daysOfWeekDisabled: "2",
             datesDisabled: {{ listDateDisabled|json_encode()|raw }},
             autoclose: true,
@@ -87,10 +88,11 @@
         // Fonction pour bloquer l'acces au Ticket journée si la date du jour est selectionnée et qu'il est 14h passé.
         function verif14h() {
             var x = document.getElementById("appbundle_client_dateReservation").value;
-            if (moment().format('DD/MM/YYYY') == x && moment().format("HH") >= 14) {
+            moment.locale("{{ app.request.locale }}")
+            if (moment().format('DD MMMM YYYY') == x && moment().format("HH") >= 14) {
                 document.getElementById("appbundle_client_typeTicket_0").disabled = true;
                 document.getElementById("appbundle_client_typeTicket_0").style.display = 'none';
-                document.getElementById("message").innerHTML = "Les tickets journée ne sont plus disponibles à partir de 14 heure";
+                document.getElementById("message").innerHTML = "{{ 'text.message14'|trans }}";
             } else {
                 document.getElementById("appbundle_client_typeTicket_0").style.display = 'block';
                 document.getElementById("appbundle_client_typeTicket_0").disabled = false;

@@ -1,0 +1,74 @@
+title:
+  page:
+    titleParent: Billetterie Musée du Louvre
+    home: Accueil
+    etape1: Etape 1
+    etape2: Etape 2
+    etape3: Etape 3
+    etape4: Etape 4
+  body:
+    titleh1: Découvrir le Louvre !
+    titleh2: Réservation de ticket pour la visite du musée.
+    h3etape1: Demande d'informations
+    h3etape2: Remplir les Tickets
+    h3etape3: Confirmation de commande
+    h3etape4: Merci pour votre achat !
+  footer:
+    content: &copy;2017 Projet 4 - Billetterie Musée du Louvre
+button:
+    booking: Réservation
+    validate: Valider
+    priceInfo: Informations sur les tarifs
+    pay: Payer
+modal:
+    titlePriceInfo: Informations sur les tarifs
+    buttonClose: Fermer
+    tableTitlePrice: Tarif
+    tableTitleDay: Prix Journée
+    tableTitleHalfDay: Prix Demi-Journée
+    tableLine_1_1: Enfant (de 0 à 3 ans)
+    tableLine_2_1: Enfant (de 4 à 11 ans)
+    tableLine_3_1: Normal (à patir de 12 ans)
+    tableLine_4_1: Senior (à patir de 60 ans)
+    tableLine_5_1: Réduit
+    infoTitle_1: Tarif réduit
+    infoText_1: Le tarif réduit est accordè dans certaines conditions(étudiants, employé du musée, d'un service du Ministère de la Culture, militaire...). Les personnes qui ont choisi l'option tarif réduit doivent se présenter muni d'un justificatif.
+    infoTitle_2: Tarif Journée
+    infoText_2: Ce tarif donne accès au musée de l'heure d'ouverture jusqu'à la fermeture.
+    infoTitle_3: Tarif Démi-Journée
+    infoText_3: Ce tarif donne accès au musée de 14 heure jusqu'à la fermeture.
+form:
+    email: Email
+    confirmEmail: Confirmer Email
+    dateReservation: Date de réservation
+    nbrTicket: Nombre de ticket
+    typeTicket: Type de ticket
+    radiotypeTicket1: Ticket journée
+    radiotypeTicket2: Ticket demi-journée
+    name: Nom
+    firstname: Prénom
+    country: Pays
+    birthdate: Date de naissance
+    reducedPrice: Tarif réduit
+    abbReducedPrice: TR
+    price: Prix
+text:
+    totalOrder: Total commande
+    louvreMuseum: Musée du Louvre
+    ticketOrder: Commande Billet
+    message14: Les tickets journée ne sont plus disponibles à partir de 14 heure.
+    finalCommandmsgLine1: Vos billets vous ont été envoyés par Email !
+    finalCommandmsgLine2: Vous pouvez vous présenter à l'entrée du Musée du louvre avec cet Email.
+    finalCommandmsgLine3: N'oubliez pas de vous munir de vos justificatifs si vous avez cocher "Tarif Réduit".
+modelEmail:
+    titleh3: Billetterie du Musée du Louvre
+    yourCommand: Votre commande
+    information: Informations
+    code: Code de réservation
+    ticketNum: Ticket N°
+    msgline1: Nous vous remercions de votre commande et nous vous souhaitons un bon moment au Musée du Louvre.
+    msgline2: Cet Email fait office de billet d'entrée
+msgFlash:
+    infoBaseSucces: Etape 1 enregistrée avec succèss !
+    checkOutSucces: Votre paiement est bien enregistré !
+    checkOutError: Une erreur s'est produite pendant le paiement !

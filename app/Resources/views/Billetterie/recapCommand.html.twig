@@ -1,26 +1,27 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "layout.html.twig" %}
 
-{% block title %}Etape 3{% endblock %}
+{% block title %}{{ 'title.page.etape3'|trans }}{% endblock %}
 
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
-    <h3 class="box"><b>Etape 3 - Confirmation de commande</b></h3>
+    <h3 class="box"><b>{{ 'title.page.etape3'|trans }} - {{ 'title.body.h3etape3'|trans }}</b></h3>
     <br />
     <div class="box">
-            Email : {{ client.email }} </br>
-            Date de réservation : {{ client.dateReservation|date('d/m/Y') }} </br>
-            Nombre de ticket : {{ client.nbrTicket }} </br>
-            Type de ticket : {{ client.typeTicket }} </br>
+        <p>
+            {{ 'form.email'|trans }} : {{ client.email }} </br>
+            {{ 'form.dateReservation'|trans }} : {{ client.dateReservation|date('d/m/Y') }} </br>
+            {{ 'form.nbrTicket'|trans }} : {{ client.nbrTicket }} </br>
+            {{ 'form.typeTicket'|trans }} : {{ client.typeTicket }} </br>
         </p>
         <table class="tabCommand">
             <thead>
                 <tr>
-                    <td>Nom</td>
-                    <td>Prenom</td>
-                    <td>Date de naissance</td>
-                    <td>TR</td>
-                    <td>Prix</td>
+                    <td>{{ 'form.name'|trans }}</td>
+                    <td>{{ 'form.firstname'|trans }}</td>
+                    <td>{{ 'form.birthdate'|trans }}</td>
+                    <td>{{ 'form.abbReducedPrice'|trans }}</td>
+                    <td>{{ 'form.price'|trans }}</td>
                 </tr>
             </thead>
             <tbody>
@@ -40,17 +41,19 @@
             </tbody>
         </table>
         <br />
-        <p>Total commande : {{ client.prixTotal|number_format(2, '.', ',') }}€</p>
+        <p>{{ 'text.totalOrder'|trans }} : {{ client.prixTotal|number_format(2, '.', ',') }}€</p>
 
         {# Bouton de paiement Stripe #}
         <form action="{{ path('order_checkout') }}" method="POST">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_LxgN9vsI0c4K5wK628nb8362"
+                    data-key="{{ stripe_data_key }}"
                     data-amount="{{ client.prixTotal|number_format(2, '.', ',') * 100 }}"
-                    data-name="Musée du Louvre"
-                    data-description="Commande Billet"
-                    data-locale="auto"
+                    data-name="{{ 'text.louvreMuseum'|trans }}"
+                    data-email="{{ client.email }}"
+                    data-description="{{ 'text.ticketOrder'|trans }}"
+                    data-label="{{ 'button.pay'|trans }}"
+                    data-locale="{{ app.request.locale }}"
                     data-currency="eur">
             </script>
         </form>

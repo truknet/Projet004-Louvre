@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Stripe\Charge;
 use Stripe\Error\Card;
@@ -16,17 +15,15 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\TicketArrayFormType;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 class BilletterieController extends Controller
 {
-
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:Billetterie:index.html.twig');
+        return $this->render('Billetterie/index.html.twig');
     }
 
     /**
@@ -43,11 +40,10 @@ class BilletterieController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->container->get('app.setSessionClient')->setSessionClient($client);
-            if ($this->container->get('app.controleDate')->controleDate($client) === false) { return $this->redirectToRoute('info_base'); }
-            $request->getSession()->getFlashBag()->add('info', 'Etape 1 enregistrée avec succèss !');
+            $request->getSession()->getFlashBag()->add('info', $this->get('translator')->trans('msgFlash.infoBaseSucces'));
             return $this->redirectToRoute('fill_ticket', array('id' => $client->getId()));
         }
-        return $this->render('AppBundle:Billetterie:infoBase.html.twig', array(
+        return $this->render('Billetterie/infoBase.html.twig', array(
             'listDateDisabled' => $listDateDisabled,
             'form' => $form->createView(),
         ));
@@ -69,7 +65,7 @@ class BilletterieController extends Controller
             $this->container->get('app.setSessionClient')->setSessionClient($client);
             return $this->redirectToRoute('recap_command', array('id' => $client->getId()));
         }
-        return $this->render('AppBundle:Billetterie:fillTicket.html.twig', array(
+        return $this->render('Billetterie/fillTicket.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -85,7 +81,7 @@ class BilletterieController extends Controller
         if ($client === null) { return $this->redirectToRoute('homepage'); }
         $this->container->get('app.generatePrices')->generatePrices($client);
         $this->container->get('app.setSessionClient')->setSessionClient($client);
-        return $this->render('AppBundle:Billetterie:recapCommand.html.twig', array(
+        return $this->render('Billetterie/recapCommand.html.twig', array(
             'client' => $client,
         ));
     }
@@ -104,7 +100,7 @@ class BilletterieController extends Controller
         $client = $this->container->get('app.getSessionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
 
-        Stripe::setApiKey("sk_test_ajscgIwFoEKfQprwjktnuZKi");
+        Stripe::setApiKey($this->getParameter('stripe_api_key'));
         // Get the credit card details submitted by the form
         $token = $_POST['stripeToken'];
         // Create a charge: this will charge the user's card
@@ -115,13 +111,12 @@ class BilletterieController extends Controller
                 "source" => $token,
                 "description" => "Musée du Louvre"
             ));
-            $this->addFlash("success","Votre paiement est bien enregistré !");
+            $this->addFlash("success",$this->get('translator')->trans('msgFlash.checkOutSucces'));
             $client->setToken($token);
-            $this->container->get('app.createUniqId')->createUniqId($client);
             $this->container->get('app.setSessionClient')->setSessionClient($client);
             return $this->redirectToRoute('final_command', array('id' => $client->getId()));
         } catch(Card $e) {
-            $this->addFlash("error","Une erreur s'est produite pendant le paiement !");
+            $this->addFlash("error",$this->get('translator')->trans('msgFlash.checkOutError'));
             return $this->redirectToRoute('recap_command', array('id' => $client->getId()));
             // The card has been declined
         }
@@ -141,6 +136,6 @@ class BilletterieController extends Controller
             // Envoie Email
             $this->container->get('app.sendEmail')->sendEmail($client);
         }
-        return $this->render('AppBundle:Billetterie:finalCommand.html.twig');
+        return $this->render('Billetterie/finalCommand.html.twig');
     }
 }

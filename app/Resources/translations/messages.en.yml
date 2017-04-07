@@ -1,0 +1,74 @@
+title:
+  page:
+    titleParent: Ticketing service at the Louvre Museum
+    home: Home
+    etape1: Step 1
+    etape2: Step 2
+    etape3: Step 3
+    etape4: Step 4
+  body:
+    titleh1: Discover the Louvre !
+    titleh2: Reservation of tickets for the museum visit.
+    h3etape1: Information request
+    h3etape2: Filling tickets
+    h3etape3: Order confirmation
+    h3etape4: Thank you for your purchase !
+  footer:
+    content: &copy;2017 Projet 4 - Ticketing service at the Louvre Museum.
+button:
+    booking: Booking
+    validate: Validate
+    priceInfo: Information about prices
+    pay: Pay
+modal:
+    titlePriceInfo: Information about prices
+    buttonClose: Close
+    tableTitlePrice: Price
+    tableTitleDay: Price Day
+    tableTitleHalfDay: Half Day Price
+    tableLine_1_1: Child (0 to 3 years)
+    tableLine_2_1: Child (4 to 11 years)
+    tableLine_3_1: Normal (from 12 years)
+    tableLine_4_1: Senior (from 60 years)
+    tableLine_5_1: Reduced
+    infoTitle_1: Reduced price
+    infoText_1: The reduced rate is granted under certain conditions (students, employees of the museum, a department of the Ministry of Culture, military ...). Those who have chosen the reduced fare option must present themselves with a receipt.
+    infoTitle_2: Day rate
+    infoText_2: This tariff gives access to the museum from opening to closing.
+    infoTitle_3: Half day rate
+    infoText_3: This tariff gives access to the museum from 14 hours until closing.
+form:
+    email: Email
+    confirmEmail: Confirm Email
+    dateReservation: Date of reservation
+    nbrTicket: Number of ticket
+    typeTicket: Type of ticket
+    radiotypeTicket1: Day ticket
+    radiotypeTicket2: Half-day ticket
+    name: Name
+    firstname: Firstname
+    country: Country
+    birthdate: Birth Date
+    reducedPrice: Reduced Price
+    abbReducedPrice: RP
+    price: Price
+text:
+    totalOrder: Total order
+    louvreMuseum: Louvre Museum
+    ticketOrder: Ticket Order
+    message14: Day tickets are no longer available from 14 hours.
+    finalCommandmsgLine1: Your tickets have been sent to you by Email !
+    finalCommandmsgLine2: You can present yourself at the entrance of the Musée du Louvre with this Email.
+    finalCommandmsgLine3: Do not forget to bring your proofs if you have ticked "Reduced price".
+modelEmail:
+    titleh3: Ticketing service at the Louvre Museum
+    yourCommand: Your command
+    information: Informations
+    code: Booking Code
+    ticketNum: Ticket N°
+    msgline1: We thank you for your order and we wish you a good time at the Louvre Museum.
+    msgline2: This Email serves as a ticket.
+msgFlash:
+    infoBaseSucces: Step 1 successfully registered!
+    checkOutSucces: Your payment is registered!
+    checkOutError: An error occurred during payment!
