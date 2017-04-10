@@ -20,6 +20,7 @@ button:
     validate: Valider
     priceInfo: Informations sur les tarifs
     pay: Payer
+    receive: Recevoir les billets
 modal:
     titlePriceInfo: Informations sur les tarifs
     buttonClose: Fermer
@@ -45,6 +46,8 @@ form:
     typeTicket: Type de ticket
     radiotypeTicket1: Ticket journée
     radiotypeTicket2: Ticket demi-journée
+    typeTicket1: Journée
+    typeTicket2: Demi-journée
     name: Nom
     firstname: Prénom
     country: Pays

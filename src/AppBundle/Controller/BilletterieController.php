@@ -132,7 +132,7 @@ class BilletterieController extends Controller
         $client = $this->container->get('app.getSessionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
         $this->container->get('app.saveClient')->saveClient($client);
-        if ($client->getToken()) {
+        if ($client->getToken() or $client->getPrixTotal() == 0) {
             // Envoie Email
             $this->container->get('app.sendEmail')->sendEmail($client);
         }

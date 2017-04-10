@@ -43,20 +43,26 @@
         <br />
         <p>{{ 'text.totalOrder'|trans }} : {{ client.prixTotal|number_format(2, '.', ',') }}€</p>
 
-        {# Bouton de paiement Stripe #}
-        <form action="{{ path('order_checkout') }}" method="POST">
-            <script
-                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="{{ stripe_data_key }}"
-                    data-amount="{{ client.prixTotal|number_format(2, '.', ',') * 100 }}"
-                    data-name="{{ 'text.louvreMuseum'|trans }}"
-                    data-email="{{ client.email }}"
-                    data-description="{{ 'text.ticketOrder'|trans }}"
-                    data-label="{{ 'button.pay'|trans }}"
-                    data-locale="{{ app.request.locale }}"
-                    data-currency="eur">
-            </script>
-        </form>
+        {% if client.prixTotal > 0 %}
+            {# Bouton de paiement Stripe #}
+            <form action="{{ path('order_checkout') }}" method="POST">
+                <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="{{ stripe_data_key }}"
+                        data-amount="{{ client.prixTotal|number_format(2, '.', ',') * 100 }}"
+                        data-name="{{ 'text.louvreMuseum'|trans }}"
+                        data-email="{{ client.email }}"
+                        data-description="{{ 'text.ticketOrder'|trans }}"
+                        data-label="{{ 'button.pay'|trans }}"
+                        data-locale="{{ app.request.locale }}"
+                        data-currency="eur">
+                </script>
+            </form>
+        {% else %}
+            <a href="{{ path('final_command') }}"><button class="btn btn-success btn-sm" >{{ 'button.receive'|trans }}</button></a>
+        {% endif %}
+
+
     </div>
 {% endblock %}
 

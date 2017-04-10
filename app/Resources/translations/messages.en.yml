@@ -20,6 +20,7 @@ button:
     validate: Validate
     priceInfo: Information about prices
     pay: Pay
+    receive: Receive tickets
 modal:
     titlePriceInfo: Information about prices
     buttonClose: Close
@@ -45,6 +46,8 @@ form:
     typeTicket: Type of ticket
     radiotypeTicket1: Day ticket
     radiotypeTicket2: Half-day ticket
+    typeTicket1: Day
+    typeTicket2: Half-day
     name: Name
     firstname: Firstname
     country: Country
