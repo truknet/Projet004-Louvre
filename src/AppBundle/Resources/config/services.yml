@@ -47,20 +47,11 @@ services:
             - "@templating"
             - "@mailer"
 
-    app.saveClient:
+    app.gestionClient:
         class: AppBundle\Services\GestionClient
         arguments:
             - "@doctrine.orm.entity_manager"
-
-    app.getSessionClient:
-        class: AppBundle\Services\GestionClient
-        arguments:
-            - "@doctrine.orm.entity_manager"
-
-    app.setSessionClient:
-        class: AppBundle\Services\GestionClient
-        arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@Session"
 
     app.generateListDateDisabled:
         class: AppBundle\Services\GenerateListDateDisabled

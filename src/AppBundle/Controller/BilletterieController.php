@@ -39,7 +39,7 @@ class BilletterieController extends Controller
         $form = $this->get('form.factory')->create(ClientInfoBaseType::class, $client);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->container->get('app.setSessionClient')->setSessionClient($client);
+            $this->container->get('app.gestionClient')->setSessionClient($client);
             $request->getSession()->getFlashBag()->add('info', $this->get('translator')->trans('msgFlash.infoBaseSucces'));
             return $this->redirectToRoute('fill_ticket', array('id' => $client->getId()));
         }
@@ -50,19 +50,19 @@ class BilletterieController extends Controller
     }
 
     /**
-     * @Route("/fillticket", name="fill_ticket")
      * @param Request $request
      * @return Response
+     * @Route("/fillticket", name="fill_ticket")
      */
     public function fillTicketAction(Request $request)
     {
-        $client = $this->container->get('app.getSessionClient')->getSessionClient();
+        $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
         $this->container->get('app.createTicket')->createTicket($client);
         $form = $this->get('form.factory')->create(TicketArrayFormType::class, $client);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->container->get('app.setSessionClient')->setSessionClient($client);
+            $this->container->get('app.gestionClient')->setSessionClient($client);
             return $this->redirectToRoute('recap_command', array('id' => $client->getId()));
         }
         return $this->render('Billetterie/fillTicket.html.twig', array(
@@ -77,10 +77,10 @@ class BilletterieController extends Controller
      */
     public function recapCommand(Request $request)
     {
-        $client = $this->container->get('app.getSessionClient')->getSessionClient();
+        $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
         $this->container->get('app.generatePrices')->generatePrices($client);
-        $this->container->get('app.setSessionClient')->setSessionClient($client);
+        $this->container->get('app.gestionClient')->setSessionClient($client);
         return $this->render('Billetterie/recapCommand.html.twig', array(
             'client' => $client,
         ));
@@ -97,7 +97,7 @@ class BilletterieController extends Controller
      */
     public function checkoutAction(Request $request)
     {
-        $client = $this->container->get('app.getSessionClient')->getSessionClient();
+        $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
 
         Stripe::setApiKey($this->getParameter('stripe_api_key'));
@@ -113,7 +113,7 @@ class BilletterieController extends Controller
             ));
             $this->addFlash("success",$this->get('translator')->trans('msgFlash.checkOutSucces'));
             $client->setToken($token);
-            $this->container->get('app.setSessionClient')->setSessionClient($client);
+            $this->container->get('app.gestionClient')->setSessionClient($client);
             return $this->redirectToRoute('final_command', array('id' => $client->getId()));
         } catch(Card $e) {
             $this->addFlash("error",$this->get('translator')->trans('msgFlash.checkOutError'));
@@ -129,9 +129,9 @@ class BilletterieController extends Controller
      */
     public function finalCommand(Request $request)
     {
-        $client = $this->container->get('app.getSessionClient')->getSessionClient();
+        $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
-        $this->container->get('app.saveClient')->saveClient($client);
+        $this->container->get('app.gestionClient')->saveClient($client);
         if ($client->getToken() or $client->getPrixTotal() == 0) {
             // Envoie Email
             $this->container->get('app.sendEmail')->sendEmail($client);

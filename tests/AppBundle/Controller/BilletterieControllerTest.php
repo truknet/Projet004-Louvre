@@ -14,13 +14,15 @@ class BilletterieControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/fr/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('title.body.titleh1', $crawler->filter('h1')->text());
+        $this->assertContains('Découvrir le Louvre !', $crawler->filter('h1')->text());
         $link = $crawler
-            ->filter('a:contains("button.booking")')
+            ->filter('a:contains("Réservation")')
             ->eq(0)
             ->link()
         ;
-        $client->click($link);
+        $crawler = $client->click($link);
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('h3:contains("Etape 1")')->count());
     }
 
     public function testInfoBaseAction()
@@ -28,35 +30,38 @@ class BilletterieControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/fr/infobase');
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('h3:contains("title.page.etape1")')->count());
+        $this->assertEquals(1, $crawler->filter('h3:contains("Etape 1")')->count());
 
-        $form = $crawler->selectButton('button.validate')->form();
+        $form = $crawler->selectButton('Valider')->form();
         $form['appbundle_client[email][first]'] = 'info@truknet.com';
         $form['appbundle_client[email][second]'] = 'info@truknet.com';
-        $form['appbundle_client[dateReservation]'] = (new \DateTime())->format('Y-m-d');
+        $form['appbundle_client[dateReservation]'] = '04 04 2018';
         $form['appbundle_client[nbrTicket]'] = 1;
-        $form['appbundle_client[typeTicket]'] = 'Journée';
+        $form['appbundle_client[typeTicket]'] = 'Demi-journée';
         $crawler = $client->submit($form);
+
+        $client->followRedirect();
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
-    /**
-     *
-     */
     public function testFillTicketAction()
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/fr/fillticket');
+        $client = new Client();
+        $client->setDate(new \DateTime());
+        $client->setEmail('info@truknet.com');
+        $client->setDateReservation(new \DateTime());
+        $client->setNbrTicket(1);
+        $client->setTypeTicket('Demi-journée');
 
-        $clientX = new Client();
-        $clientX->setDate(new \DateTime());
-        $clientX->setEmail('info@truknet.com');
-        $clientX->setDateReservation(new \DateTime());
-        $clientX->setNbrTicket(1);
-        $clientX->setTypeTicket('Journée');
+        $clientReq = static::createClient();
+        $container = $clientReq->getContainer();
+        $container->get('app.gestionClient')->setSessionClient($client);
+        $crawler = $clientReq->request('GET', '/fr/fillticket');
+        $this->assertTrue($clientReq->getResponse()->isSuccessful());
+        $this->assertTrue(200 === $clientReq->getResponse()->getStatusCode());
+        $this->assertEquals(1, $crawler->filter('h3:contains("Etape 2 - Remplir les Tickets")')->count());
 
-
-        $form = $crawler->filter('input[type=submit]')->form();
-
+        $form = $crawler->selectButton('Valider')->form();
         $form['ticket_array_form[tickets][0][name]'] = 'Justine';
         $form['ticket_array_form[tickets][0][firstname]'] = 'Roche';
         $form['ticket_array_form[tickets][0][country]'] = 'FR';
@@ -64,8 +69,10 @@ class BilletterieControllerTest extends WebTestCase
         $form['ticket_array_form[tickets][0][birthday][month]'] = 5;
         $form['ticket_array_form[tickets][0][birthday][year]'] = 2001;
         $form['ticket_array_form[tickets][0][tarifReduit]'] = false;
-        $crawler = $client->submit($form);
+        $crawler = $clientReq->submit($form);
 
+        // $clientReq->followRedirect();
+        $this->assertTrue($clientReq->getResponse()->isSuccessful());
     }
 
     /**
@@ -88,6 +95,4 @@ class BilletterieControllerTest extends WebTestCase
             array('/fr/infobase'),
         );
     }
-
-
 }

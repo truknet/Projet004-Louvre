@@ -10,18 +10,20 @@ namespace AppBundle\Services;
 use AppBundle\Entity\Client;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+
 class GestionClient
 {
     private $em;
+    private $session;
 
     /**
      * GestionClient constructor.
      * @param EntityManagerInterface $em
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, Session $session)
     {
         $this->em = $em;
-        $this->session = new Session();
+        $this->session = $session;
     }
 
     /**
