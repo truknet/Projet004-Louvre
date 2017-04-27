@@ -1,15 +1,23 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     mysql.trukotop.com
+    database_host:     127.0.0.1
     database_port:     ~
-    database_name:     projet004
-    database_user:     trukotop
-    database_password: Truk1408!
-    mailer_transport: mail
-    mailer_host: sub4.mail.dreamhost.com
-    mailer_user: info@trukotop.com
-    mailer_password: Truk1408!
-    secret: d8a19887e2c4d6df1b7a93b44af35c43d378cc67
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
 
-    stripe_api_key : sk_test_ajscgIwFoEKfQprwjktnuZKi
-    stripe_data_key : pk_test_LxgN9vsI0c4K5wK628nb8362
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    stripe_api_key : sk_yourkey
+    stripe_data_key : pk_yourkey
 
