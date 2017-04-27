@@ -85,13 +85,9 @@ class BilletterieController extends Controller
     }
 
     /**
-     * @Route(
-     *     "/checkout",
-     *     name="order_checkout",
-     *     methods="POST"
-     * )
-     * @return Response
+     * @Route("/checkout", name="order_checkout", methods="POST")
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function checkoutAction(Request $request)
     {
