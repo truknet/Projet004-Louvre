@@ -15,7 +15,8 @@ class CheckIfDateIsBefore
      */
     public function checkIfDateIsBefore($date)
     {
-        $dateInterval = (new \DateTime())->diff($date);
+        $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $dateInterval = $dateNow->diff($date);
         if ($dateInterval->invert == 1)
         {
             return false;

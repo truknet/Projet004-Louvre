@@ -8,12 +8,10 @@ use Stripe\Error\Card;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation;
 use AppBundle\Entity\Client;
 use AppBundle\Form\ClientInfoBaseType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\TicketArrayFormType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class BilletterieController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Client;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -32,8 +32,10 @@ class ClientInfoBaseType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'form.dateReservation',
                 'required' => true,
+                'model_timezone' => 'Europe/Paris',
+                'view_timezone' => 'Europe/Paris',
                 'input' => 'datetime',
-                'format' => 'dd MM yyyy',
+                'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'readonly' => 'readonly',
                     'onchange' => 'verif14h()'),

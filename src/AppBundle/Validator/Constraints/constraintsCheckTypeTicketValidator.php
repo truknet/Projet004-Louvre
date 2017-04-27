@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use AppBundle\Services\CheckIf14Hour;
 
-class constraintsCheckTypeTicketValidator extends ConstraintValidator
+class ConstraintsCheckTypeTicketValidator extends ConstraintValidator
 {
 
     private $checkIf14Hour;

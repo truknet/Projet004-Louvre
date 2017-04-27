@@ -2,9 +2,6 @@
 
 namespace AppBundle\Services;
 
-use AppBundle\Services\GenerateListDateDisabled;
-
-
 class CheckIfDateInList
 {
 
@@ -32,6 +29,4 @@ class CheckIfDateInList
         if (in_array($dateTmp, $listDateDisabled)) { return false; }
         return true;
     }
-
-
 }

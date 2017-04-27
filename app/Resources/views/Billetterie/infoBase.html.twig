@@ -70,14 +70,13 @@
     </div>
 
 
-
 {% endblock %}
 
 {% block javascript %}
     <script >
         $('.input-group.date').datepicker({
             language: "{{ app.request.locale }}",
-            format: "dd MM yyyy",
+            format: 'dd/mm/yyyy',
             daysOfWeekDisabled: "2",
             datesDisabled: {{ listDateDisabled|json_encode()|raw }},
             autoclose: true,

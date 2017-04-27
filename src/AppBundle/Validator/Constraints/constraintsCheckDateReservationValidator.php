@@ -8,7 +8,7 @@ use AppBundle\Services\CheckIfDateIsBefore;
 use AppBundle\Services\CheckIfDateInList;
 
 
-class constraintsCheckDateReservationValidator extends ConstraintValidator
+class ConstraintsCheckDateReservationValidator extends ConstraintValidator
 {
 
     private $checkIfDateIsBefore;

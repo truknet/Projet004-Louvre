@@ -11,3 +11,4 @@ root:
         _controller: FrameworkBundle:Redirect:urlRedirect
         path: /fr
         permanent: false
+

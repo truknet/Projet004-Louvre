@@ -51,10 +51,10 @@ class Client
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="datetime", nullable=false)
+     * @Assert\NotBlank();
      * @Assert\DateTime()
      * @CustomAssert\constraintsCheckDateReservation()
      * @Assert\Range(min = "now -1 days", max = "+365 days")
-     * @Assert\NotBlank();
      *
      */
     private $dateReservation;
@@ -108,7 +108,7 @@ class Client
         $this->date = new \Datetime();
         $this->date->setTimezone(new \DateTimeZone('Europe/Paris'));
         $this->tickets = new ArrayCollection();
-        $this->uniquid = uniqid();
+        $this->uniquId = uniqid();
     }
 
 

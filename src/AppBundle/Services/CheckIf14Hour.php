@@ -28,3 +28,4 @@ class CheckIf14Hour
         return true;
     }
 }
+

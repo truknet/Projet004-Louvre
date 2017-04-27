@@ -62,7 +62,7 @@ text:
     message14: Les tickets journée ne sont plus disponibles à partir de 14 heure.
     finalCommandmsgLine1: Vos billets vous ont été envoyés par Email !
     finalCommandmsgLine2: Vous pouvez vous présenter à l'entrée du Musée du louvre avec cet Email.
-    finalCommandmsgLine3: N'oubliez pas de vous munir de vos justificatifs si vous avez cocher "Tarif Réduit".
+    finalCommandmsgLine3: N'oubliez pas de vous munir de vos justificatifs si vous avez coché "Tarif Réduit".
 modelEmail:
     titleh3: Billetterie du Musée du Louvre
     yourCommand: Votre commande

@@ -57,3 +57,4 @@ class GestionClient
         $this->session->remove('tmpClient');
     }
 }
+

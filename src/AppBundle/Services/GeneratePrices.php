@@ -1,21 +1,16 @@
 <?php
 namespace AppBundle\Services;
 
-use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Entity\Client;
 
 class GeneratePrices
 {
 
-    private $em;
-
     /**
      * ToolsBox constructor.
-     * @param EntityManagerInterface $em
      */
-    public function __construct(EntityManagerInterface $em, $getAge)
+    public function __construct($getAge)
     {
-        $this->em = $em;
         $this->getAge = $getAge;
     }
 
@@ -38,7 +33,7 @@ class GeneratePrices
         $coef = ($client->getTypeTicket() == Client::TYPE_DAY) ? 1 : 0.5;
 
         foreach ($client->getTickets() as $ticket) {
-            if ($ticket->getTarifReduit() == false) {
+            if ($ticket->getTarifReduit() === false) {
                 $ticket->setPrix($priceRange[$this->getAge->getAge($ticket->getBirthday())] * $coef);
             } else {
                 if (($priceRange[$this->getAge->getAge($ticket->getBirthday())] * $coef) > ($tarifReduit * $coef)) {
