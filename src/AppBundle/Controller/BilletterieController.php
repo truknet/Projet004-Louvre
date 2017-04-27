@@ -35,12 +35,11 @@ class BilletterieController extends Controller
     {
         $client = new Client();
         $listDateDisabled = $this->container->get('app.generateListDateDisabled')->generateListDateDisabled();
-
         $form = $this->get('form.factory')->create(ClientInfoBaseType::class, $client);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->container->get('app.gestionClient')->setSessionClient($client);
-            $request->getSession()->getFlashBag()->add('info', $this->get('translator')->trans('msgFlash.infoBaseSucces'));
+            $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('msgFlash.infoBaseSucces'));
             return $this->redirectToRoute('fill_ticket', array('id' => $client->getId()));
         }
         return $this->render('Billetterie/infoBase.html.twig', array(
@@ -71,11 +70,10 @@ class BilletterieController extends Controller
     }
 
     /**
-     * @return Response
-     * @param Request $request
      * @Route("/recapcommand", name="recap_command")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function recapCommand(Request $request)
+    public function recapCommand()
     {
         $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
@@ -123,11 +121,10 @@ class BilletterieController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return Response
      * @Route("/finalcommand", name="final_command")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function finalCommand(Request $request)
+    public function finalCommand()
     {
         $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
