@@ -31,11 +31,12 @@ class ClientInfoBaseType extends AbstractType
             ->add('dateReservation', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'label' => 'form.dateReservation',
+                'html5' => false,
                 'required' => true,
                 'model_timezone' => 'Europe/Paris',
                 'view_timezone' => 'Europe/Paris',
                 'input' => 'datetime',
-                'format' => 'dd/MM/yyyy',
+                'format' => 'dd MM yyyy',
                 'attr' => array(
                     'readonly' => 'readonly',
                     'onchange' => 'verif14h()'),

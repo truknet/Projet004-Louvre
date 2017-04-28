@@ -9,9 +9,11 @@ use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Client;
-use AppBundle\Form\ClientInfoBaseType;
+use AppBundle\Form\Type\ClientInfoBaseType;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\TicketArrayFormType;
+use AppBundle\Form\Type\TicketArrayFormType;
+use Symfony\Component\PropertyInfo\Tests\Fixtures\Dummy;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class BilletterieController extends Controller
 {

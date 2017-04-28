@@ -51,10 +51,9 @@ class Client
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="datetime", nullable=false)
-     * @Assert\NotBlank();
+     * @Assert\NotBlank()
      * @Assert\DateTime()
-     * @CustomAssert\constraintsCheckDateReservation()
-     * @Assert\Range(min = "now -1 days", max = "+365 days")
+     * @CustomAssert\ContaintsCheckDateReservation()
      *
      */
     private $dateReservation;
@@ -76,8 +75,9 @@ class Client
 
     /**
      * @var string
-     * @CustomAssert\constraintsCheckTypeTicket()
+     *
      * @ORM\Column(name="type_ticket", type="string", length=255, nullable=true)
+     * @CustomAssert\ContaintsCheckTypeTicket()
      */
     private $typeTicket;
 
@@ -202,7 +202,7 @@ class Client
      *
      * @return Client
      */
-    public function setDateReservation($dateReservation)
+    public function setDateReservation(\DateTime $dateReservation)
     {
         $this->dateReservation = $dateReservation;
 

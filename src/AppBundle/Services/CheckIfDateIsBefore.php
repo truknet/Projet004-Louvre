@@ -4,18 +4,19 @@
 namespace AppBundle\Services;
 
 
+use Symfony\Component\Validator\Constraints\DateTime;
+
 class CheckIfDateIsBefore
 {
 
     /**
-     * Controle si la date n'est pas inférieur à la date du jour
-     *
-     * @param $date
+     * @param DateTime $date
      * @return bool
      */
     public function checkIfDateIsBefore($date)
     {
-        $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+
+        $dateNow = new \DateTime('now');
         $dateInterval = $dateNow->diff($date);
         if ($dateInterval->invert == 1)
         {

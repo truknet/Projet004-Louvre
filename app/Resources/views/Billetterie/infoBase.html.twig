@@ -76,7 +76,7 @@
     <script >
         $('.input-group.date').datepicker({
             language: "{{ app.request.locale }}",
-            format: 'dd/mm/yyyy',
+            format: "dd mm yyyy",
             daysOfWeekDisabled: "2",
             datesDisabled: {{ listDateDisabled|json_encode()|raw }},
             autoclose: true,

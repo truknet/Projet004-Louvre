@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %} - {{ 'title.page.titleParent'|trans }}</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker3.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bootstrap-datepicker-1.7.0-dist/css/bootstrap-datepicker3.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/billetteriecss.css') }}" />
 
     {% block stylesheets %}{% endblock %}
@@ -118,8 +118,13 @@
 
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.fr.min.js') }}"></script>
+<script src="{{ asset('bootstrap-datepicker-1.7.0-dist/js/bootstrap-datepicker.js') }}" charset="UTF-8"></script>
+{% if app.request.locale == 'en' %}
+    <script type="text/javascript" src="{{ asset('bootstrap-datepicker-1.7.0-dist/locales/bootstrap-datepicker.en-GB.min.js') }}" charset="UTF-8"></script>
+{% endif %}
+{% if app.request.locale == 'fr' %}
+    <script type="text/javascript" src="{{ asset('bootstrap-datepicker-1.7.0-dist/locales/bootstrap-datepicker.fr.min.js') }}"></script>
+{% endif %}
 <script src="{{ asset('js/moment-with-locales.js') }}"></script>
 
 {% block javascript %}{% endblock %}
