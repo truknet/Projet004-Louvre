@@ -94,8 +94,8 @@ class BilletterieController extends Controller
 
         Stripe::setApiKey($this->getParameter('stripe_api_key'));
         // Get the credit card details submitted by the form
-        // $token = $_POST['stripeToken'];
-        $token = $_REQUEST['stripeToken'];
+        $token = $_POST['stripeToken'];
+
 
         // Create a charge: this will charge the user's card
         try {
