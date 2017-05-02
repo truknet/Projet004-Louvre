@@ -38,7 +38,7 @@ class BilletterieController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->container->get('app.gestionClient')->setSessionClient($client);
             $request->getSession()->getFlashBag()->add('success', $this->get('translator')->trans('msgFlash.infoBaseSucces'));
-            return $this->redirectToRoute('fill_ticket', array('id' => $client->getId()));
+            return $this->redirectToRoute('fill_ticket');
         }
         return $this->render('Billetterie/infoBase.html.twig', array(
             'listDateDisabled' => $listDateDisabled,
@@ -60,7 +60,7 @@ class BilletterieController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->container->get('app.gestionClient')->setSessionClient($client);
-            return $this->redirectToRoute('recap_command', array('id' => $client->getId()));
+            return $this->redirectToRoute('recap_command');
         }
         return $this->render('Billetterie/fillTicket.html.twig', array(
             'form' => $form->createView(),
@@ -71,7 +71,7 @@ class BilletterieController extends Controller
      * @Route("/recapcommand", name="recap_command")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function recapCommand()
+    public function recapCommandAction()
     {
         $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
@@ -111,7 +111,7 @@ class BilletterieController extends Controller
             return $this->redirectToRoute('final_command', array('id' => $client->getId()));
         } catch(Card $e) {
             $this->addFlash("error",$this->get('translator')->trans('msgFlash.checkOutError'));
-            return $this->redirectToRoute('recap_command', array('id' => $client->getId()));
+            return $this->redirectToRoute('recap_command');
             // The card has been declined
         }
     }
@@ -120,7 +120,7 @@ class BilletterieController extends Controller
      * @Route("/finalcommand", name="final_command")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function finalCommand()
+    public function finalCommandAction()
     {
         $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
