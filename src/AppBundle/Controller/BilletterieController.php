@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Stripe\Charge;
 use Stripe\Error\Card;
@@ -18,6 +19,7 @@ class BilletterieController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/", name="homepage")
+     * * @Method({"GET"})
      */
     public function indexAction()
     {
@@ -28,6 +30,7 @@ class BilletterieController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/infobase", name="info_base")
      * @param Request $request
+     * @Method({"GET", "POST"})
      */
     public function infoBaseAction(Request $request)
     {
@@ -50,6 +53,7 @@ class BilletterieController extends Controller
      * @param Request $request
      * @return Response
      * @Route("/fillticket", name="fill_ticket")
+     * @Method({"GET", "POST"})
      */
     public function fillTicketAction(Request $request)
     {
@@ -70,6 +74,7 @@ class BilletterieController extends Controller
     /**
      * @Route("/recapcommand", name="recap_command")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Method({"GET"})
      */
     public function recapCommandAction()
     {
@@ -83,9 +88,10 @@ class BilletterieController extends Controller
     }
 
     /**
-     * @Route("/checkout", name="order_checkout", methods="POST")
+     * @Route("/checkout", name="order_checkout")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Method({"POST"})
      */
     public function checkoutAction(Request $request)
     {
@@ -119,6 +125,7 @@ class BilletterieController extends Controller
     /**
      * @Route("/finalcommand", name="final_command")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Method({"GET"})
      */
     public function finalCommandAction()
     {
