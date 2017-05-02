@@ -12,8 +12,6 @@ use AppBundle\Entity\Client;
 use AppBundle\Form\Type\ClientInfoBaseType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\TicketArrayFormType;
-use Symfony\Component\PropertyInfo\Tests\Fixtures\Dummy;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class BilletterieController extends Controller
 {
