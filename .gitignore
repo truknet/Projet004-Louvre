@@ -5,3 +5,5 @@
 /web/bundles/
 /app/config/parameters.yml
 /app/config/parameters.yml.serveur
+/web/js/moment-with-locales.js
+/web/config.php
