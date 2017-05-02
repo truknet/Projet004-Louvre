@@ -94,7 +94,9 @@ class BilletterieController extends Controller
 
         Stripe::setApiKey($this->getParameter('stripe_api_key'));
         // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
+        // $token = $_POST['stripeToken'];
+        $token = $_REQUEST['stripeToken'];
+
         // Create a charge: this will charge the user's card
         try {
             $charge = Charge::create(array(
@@ -123,7 +125,7 @@ class BilletterieController extends Controller
         $client = $this->container->get('app.gestionClient')->getSessionClient();
         if ($client === null) { return $this->redirectToRoute('homepage'); }
         $this->container->get('app.gestionClient')->saveClient($client);
-        if ($client->getToken() or $client->getPrixTotal() == 0) {
+        if ($client->getToken() || $client->getPrixTotal() == 0) {
             // Envoie Email
             $this->container->get('app.sendEmail')->sendEmail($client);
         }
