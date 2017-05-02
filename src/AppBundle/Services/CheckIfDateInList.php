@@ -2,6 +2,8 @@
 
 namespace AppBundle\Services;
 
+use Symfony\Component\Validator\Constraints\DateTime;
+
 class CheckIfDateInList
 {
 
@@ -16,13 +18,7 @@ class CheckIfDateInList
     }
 
 
-    /**
-     * Controle si la date n'est pas inclue dans la liste des jours désactivés
-     *
-     * @param $date
-     * @return bool
-     */
-    public function checkIfDateInList($date)
+    public function checkIfDateInList(\DateTime $date)
     {
         $dateTmp = $date->format('d-m-Y');
         $listDateDisabled = $this->generateListDateDisabled->generateListDateDisabled();
